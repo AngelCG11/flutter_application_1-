@@ -6,72 +6,35 @@ void main() {
   runApp(MyApp());
 }
 
+
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => MyAppState(),
-      child: MaterialApp(
-        title: 'Welcome to Flutter',
-        theme: ThemeData(
-          useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
+    return MaterialApp(
+      title: 'Mi Aplicación',
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Bienvenido a Mi Aplicación'),
         ),
-        home: MyHomePage(),
-      ),
-    );
-  }
-}
-
-class MyAppState extends ChangeNotifier {
-  var current = WordPair.random();
-}
-
-class MyHomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    var appState = context.watch<MyAppState>();
-
-    return Scaffold(
-      body: Container(
-        padding: EdgeInsets.all(20.0),
-        child: Column(
-          children: [
-            Text('Utilización de widgets Angel Cardenas Gutierrez', style: TextStyle(fontSize: 24)),
-            Text(appState.current.asLowerCase),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Text('Elemento 1'),
-                Text('Elemento 2'),
-                Text('Elemento 3'),
-              ],
+        body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: NetworkImage('https://images.prismic.io//intuzwebsite/c793931f-7acb-4ec1-90e7-4c8687dec965_Main.png?w=1200&q=75&auto=format,compress&fm=png8'),
+              fit: BoxFit.cover,
             ),
-            Stack(
-              children: [
-                Container(
-                  width: 300,
-                  height: 300,
-                  color: Colors.blue,
-                ),
-                Container(
-                  width: 200,
-                  height: 200,
-                  color: Colors.green,
-                ),
-                Container(
-                  width: 100,
-                  height: 100,
-                  color: Colors.red,
-                ),
-              ],
+          ),
+          child: Center(
+            child: Text(
+              'Mi Aplicación',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
             ),
-          ],
+          ),
         ),
       ),
     );
   }
 }
-
