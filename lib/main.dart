@@ -1,12 +1,10 @@
-import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 void main() {
   runApp(MyApp());
 }
-
-
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -16,25 +14,37 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: Text('Bienvenido a Mi Aplicación'),
         ),
-        body: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: NetworkImage('https://images.prismic.io//intuzwebsite/c793931f-7acb-4ec1-90e7-4c8687dec965_Main.png?w=1200&q=75&auto=format,compress&fm=png8'),
-              fit: BoxFit.cover,
-            ),
-          ),
-          child: Center(
-            child: Text(
-              'Mi Aplicación',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
-          ),
+        body: FutureBuilder(
+          future: fetchPokemon(),
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            if (snapshot.hasData) {
+              return Center(
+                child: Text(
+                  'Nombre del Pokémon: ${snapshot.data['name']}',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+              );
+            } else if (snapshot.hasError) {
+              return Text("${snapshot.error}");
+            }
+            return CircularProgressIndicator();
+          },
         ),
       ),
     );
+  }
+  Future<Map<String, dynamic>> fetchPokemon() async {
+    final response = await http.get(Uri.parse('https://pokeapi.co/api/v2/pokemon/charmander'));
+
+
+    if (response.statusCode == 200) {
+      return json.decode(response.body);
+    } else {
+      throw Exception('Failed to load Pokemon');
+    }
   }
 }
