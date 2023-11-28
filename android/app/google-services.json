@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "970306274765",
+    "project_id": "aplicacionpdam1",
+    "storage_bucket": "aplicacionpdam1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:970306274765:android:0703ebb6076a8ee262f084",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByQP3N2uvXD_WqJ2fJvBAXNgz3wgsxeg4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
